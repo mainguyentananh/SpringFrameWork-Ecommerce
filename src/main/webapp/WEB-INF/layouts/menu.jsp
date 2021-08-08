@@ -45,7 +45,7 @@
 						       		 ${pageContext.request.userPrincipal.name}
 						        	</a>
 						        		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							        		<a class="dropdown-item" href="<c:url value="/admin/trangchu"/>">Trang Chủ Admin</a>
+							        		<a class="dropdown-item" href="<c:url value="/noibo/trangchu"/>">Nội Bộ</a>
 							        		<a class="dropdown-item" href="<c:url value="/dangxuat"/>">Đăng Xuất</a> 
 						        		</div>
 					      			</li>

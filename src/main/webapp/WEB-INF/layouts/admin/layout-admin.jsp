@@ -17,7 +17,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description">
 <meta name="author">
-<title>SunShop-Admin</title>
+<title>Nội Bộ-SunShop</title>
 <link rel="icon" href='<c:url value="/resources/images/logo.jpg"/>'/>
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 	rel="stylesheet">
@@ -37,9 +37,9 @@
 			id="accordionSidebar">
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="<c:url value="/admin/trangchu" />">
+				href="<c:url value="/noibo/trangchu" />">
 				<div class="sidebar-brand-icon">	
-					<i class="fas fa-user-shield"></i>
+					<i class="fas fa-sun"></i>
 					<div class="sidebar-brand-text">SunShop</div>
 				</div>
 
@@ -48,21 +48,30 @@
 			<hr class="sidebar-divider my-0">
 			<div class="mt-5">
 				<li class="nav-item active"><a class="nav-link"
-					href="<c:url value="/trangchu" />"> <i class="fas fa-home"></i> <span>Trang Chủ SunShop</span></a>
+					href="<c:url value="/trangchu" />"> <i class="fas fa-home"></i> <span>SunShop</span></a>
 				</li>
 				
 				<li class="nav-item "><a class="nav-link"
-					href="<c:url value="/trangchu" />"> <i class="fas fa-home"></i> <span>Quản Lý Đơn Hàng</span></a>
+					href="<c:url value="/noibo/quanlydonhang" />"> <i class="fas fa-dolly-flatbed"></i> <span>Quản Lý Đơn Hàng</span></a>
 				</li>
 				
 				<li class="nav-item "><a class="nav-link"
-					href="<c:url value="/trangchu" />"> <i class="fas fa-home"></i> <span>Quản Lý Sách</span></a>
+					href="<c:url value="/noibo/quanlysach" />"> <i class="fas fa-book"></i> <span>Quản Lý Sách</span></a>
 				</li>
 				
 				<li class="nav-item "><a class="nav-link"
-					href="<c:url value="/trangchu" />"> <i class="fas fa-home"></i> <span>Quản Lý Loại Sách</span></a>
+					href="<c:url value="/noibo/quanlytheloaihang" />"> <i class="fas fa-pen"></i> <span>Quản Lý Thể Loại Sách</span></a>
 				</li>
-
+				
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<li class="nav-item "><a class="nav-link"
+					href="<c:url value="/admin/thongkedoanhthu" />"> <i class="fas fa-chart-bar"></i> <span>Thống Kê Doanh Thu</span></a>
+				</li>
+		
+				<li class="nav-item "><a class="nav-link"
+					href="<c:url value="/admin/quanlynhanvien" />"> <i class="fas fa-users"></i> <span>Quản Lý Nhân Viên</span></a>
+				</li>
+				</sec:authorize>
 				<hr class="sidebar-divider my-0" />
 				<li class="nav-item "><a class="nav-link"
 					href="<c:url value="/dangxuat" />"> <i

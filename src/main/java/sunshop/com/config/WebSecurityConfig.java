@@ -46,32 +46,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
-		
 		http.csrf().disable();
 		
 		//Đã Đăng Nhập Mới Được Truy Cập
-		http.authorizeRequests().antMatchers("/admin/**").authenticated();
-		
-		
-		//http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/noibo/**").authenticated();
+				
+		http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 		
 		http.authorizeRequests()
 			.and().formLogin().loginPage("/dangnhap")
 			.loginProcessingUrl("/j_spring_security_check")
 				.usernameParameter("email").passwordParameter("password")
-				.defaultSuccessUrl("/admin/trangchu")
+				.defaultSuccessUrl("/noibo/trangchu")
 				.failureUrl("/dangnhap?error=true")
 				.and().logout().logoutUrl("/dangxuat").logoutSuccessUrl("/dangnhap").deleteCookies("remember-me");
 				
 		//Config remember-me		
-		http.rememberMe().key("uniqueAndSecret").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(86400);
-		
-		
+		http.rememberMe().key("uniqueAndSecret").tokenRepository(persistentTokenRepository()).tokenValiditySeconds(86400);	
 	}
 
-	
 	//Lưu tạm cookies trên ram
 	 @Bean
 	 public PersistentTokenRepository persistentTokenRepository() {

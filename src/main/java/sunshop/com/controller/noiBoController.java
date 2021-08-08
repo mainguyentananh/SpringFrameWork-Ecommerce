@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/admin")
-public class adminController {
+@RequestMapping(value = "/noibo")
+public class noiBoController {
+
+	@GetMapping(value = "/trangchu")
+	public String trangChu() {
+		return "trangchu-ad";
+	}
 	
-	@GetMapping(value = "/403")
-	public String accessDenied() {
-	    return "403";
-	  }
+	
 }
