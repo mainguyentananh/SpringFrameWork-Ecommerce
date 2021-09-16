@@ -59,7 +59,8 @@ public class hangHoaDaoImpl implements hangHoaDao{
 	@Override
 	public List<hangHoa> search(String sach) {
 		Session session = sessionfactory.getCurrentSession();
-		List<hangHoa> l_hangHoa = session.createQuery("from hangHoa where tenHangHoa like  :sach or maSoLoaiHang.tenLoaiHang like :sach",hangHoa.class).setParameter("sach",'%'+sach+'%').list();
+		List<hangHoa> l_hangHoa = session.createQuery("from hangHoa where tenHangHoa like  :sach",hangHoa.class)
+				.setParameter("sach",'%'+sach+'%').list();
 		return l_hangHoa;
 	}
 

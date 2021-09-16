@@ -65,6 +65,6 @@
 
 
 	<script type="text/javascript" src="<c:url value="/resources/js/jquery-3.5.1.js" />"></script>	
-	<script type="text/javascript" src="<c:url value="/resources/js/sb-admin-2.min.js" />"></script>
+
 </body>
 </html>

@@ -54,7 +54,7 @@
 						  				<span class="ml-1 mr-1">${s.soLuong}</span>
 						  			<a href="<c:url value="/giam/${s.id}"/>"><i class="fas fa-minus"></i></a>	
 						  			</td>
-						  			<td><a href="<c:url value="/xoa/${s.id}"/>" class="btn btn-outline-danger btn-rm" ><i class="far fa-trash-alt"></i></a></td>
+						  			<td><a href="<c:url value="/xoa/${s.id}"/>" class="btn btn-outline-danger" ><i class="far fa-trash-alt"></i></a></td>
 						  		</tr>
 						  		</c:forEach>  		
 						  	</tbody>
