@@ -1,6 +1,6 @@
 CREATE DATABASE SUNSHOP;
 USE SUNSHOP;
-drop database sunshop;
+
 
 
 CREATE TABLE LOAIHANGHOA(
@@ -92,6 +92,3 @@ BEGIN
 END $$
  DELIMITER ;
  
-
-select MaSoHangHoa,sum(SoLuong) as sanphambanduoc  from chitietdathang
-group by MaSoHangHoa;
