@@ -62,8 +62,7 @@ public class donHangController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		//Get Nhan Vien
-		nhanVien nv = nvs.loadNhanVienByEmail(name);
-		
+		nhanVien nv = nvs.loadNhanVienByEmail(name);	
 		md.addAttribute("nv", nv);
 		md.addAttribute("donhang",dhs.getDatHangByMsdh(id));
 		return "xuly";
@@ -75,15 +74,9 @@ public class donHangController {
 		Date ngayGH = smf.parse(ngh);
 		dh.setNgayGiaoHang(ngayGH);
 		dhs.updateDatHang(dh);
-		
-		
-	
-		khachHang mailKH = khs.getKhachHangByMskh(dh.getMaSoKhachHang().getId());
-		
-		
-		
+		khachHang mailKH = khs.getKhachHangByMskh(dh.getMaSoKhachHang().getId());		
 		String content ="Ngày Giao Hàng : "+ngh;
-		mail.sendEmail("Mail server",mailKH.getEmail(), "title gmail",content);
+		mail.sendEmail("???@gmail.com",mailKH.getEmail(), "title gmail",content);
 		return "redirect:/noibo/donhang";
 	}
 	
