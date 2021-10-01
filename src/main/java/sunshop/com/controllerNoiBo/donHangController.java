@@ -58,7 +58,7 @@ public class donHangController {
 	@GetMapping(value = "/donhang/sua/{id}")
 	public String suaDonHang(Model md,@PathVariable(value = "id") Integer id) {
 		
-		//Get Email Nhân Viên Trong Spring Security
+		//Get Email NhÃ¢n ViÃªn Trong Spring Security
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		//Get Nhan Vien
@@ -77,14 +77,13 @@ public class donHangController {
 		dhs.updateDatHang(dh);
 		
 		
-		//Lấy KH - Lấy Mail
+	
 		khachHang mailKH = khs.getKhachHangByMskh(dh.getMaSoKhachHang().getId());
 		
-		//�? tưởng khách hàng xem lại đơn hàng
-		//Dùng khóa 9 của đơn hàng cũng được nhưng sợ lộ dữ liệu. Thêm 1 row làm khóa. và khóa đó được mã hóa.
 		
-		String content ="�?ơn Hàng Của Khách Hàng �?ã �?ược Xử Lý. Dự Kiến Giao Hàng Ngày: "+ngh;
-		mail.sendEmail("mainguyentananh@gmail.com",mailKH.getEmail(), "SunShop Thông Báo Giao Hàng",content);
+		
+		String content ="Ngày Giao Hàng : "+ngh;
+		mail.sendEmail("Mail server",mailKH.getEmail(), "title gmail",content);
 		return "redirect:/noibo/donhang";
 	}
 	
