@@ -18,8 +18,8 @@ public class GmailConfig {
 		sender.setPort(587);
 		
 		
-		sender.setUsername("mainguyentananh@gmail.com");
-		sender.setPassword("tananh3420");
+		sender.setUsername("???");
+		sender.setPassword("???");
 		
 		Properties pros = sender.getJavaMailProperties();
 		pros.setProperty("mail.transport.protocol", "smtp");
