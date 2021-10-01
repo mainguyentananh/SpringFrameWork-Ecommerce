@@ -1,0 +1,97 @@
+CREATE DATABASE SUNSHOP;
+USE SUNSHOP;
+drop database sunshop;
+
+
+CREATE TABLE LOAIHANGHOA(
+	MaSoLoaiHang INT PRIMARY KEY AUTO_INCREMENT,
+    TenLoaiHang VARCHAR(250)
+);
+
+CREATE TABLE NHANVIEN(
+	MaSoNhanVien INT PRIMARY KEY AUTO_INCREMENT,
+	HoTen VARCHAR(250),
+    GioiTinh TINYINT(1) DEFAULT 0,
+    NgaySinh DATE,
+    Email VARCHAR(250) ,
+    MatKhau VARCHAR(250),
+    DiaChi VARCHAR(250),
+    ChucVu CHAR(15),
+    SoDienThoai CHAR(11),
+    CONSTRAINT U_Email UNIQUE (Email)
+);
+
+CREATE TABLE KHACHHANG(
+	MaSoKhachHang INT PRIMARY KEY AUTO_INCREMENT,
+	HoTen VARCHAR(250),
+    Email VARCHAR(250) ,
+    DiaChi VARCHAR(250),
+    SoDienThoai CHAR(11) 
+);
+
+CREATE TABLE HANGHOA(
+	MaSoHangHoa INT PRIMARY KEY AUTO_INCREMENT,
+    MaSoLoaiHang INT,
+    TenHangHoa VARCHAR(250),
+    TacGia VARCHAR(250),
+    SoLuong INT,
+    Gia DOUBLE,
+    GiamGia DOUBLE DEFAULT 0,
+    Hinh VARCHAR(250),
+    MoTa TEXT,
+    CONSTRAINT FK_LHH
+		FOREIGN KEY (MaSoLoaiHang) REFERENCES LOAIHANGHOA(MaSoLoaiHang)
+);
+
+CREATE TABLE DATHANG(
+	MaSoDatHang INT PRIMARY KEY AUTO_INCREMENT,
+    MaSoNhanVien INT NULL,
+    MaSoKhachHang INT,
+    NgayDatHang DATE,
+    NgayGiaoHang DATE NULL ,
+    CONSTRAINT FK_MSNV_DH
+		FOREIGN KEY (MaSoNhanVien) REFERENCES NHANVIEN(MaSoNhanVien),
+	CONSTRAINT FK_MSKH_DH
+		FOREIGN KEY (MaSoKhachHang) REFERENCES KHACHHANG(MaSoKhachHang),
+	CONSTRAINT Check_GH
+		CHECK(NgayDatHang <= NgayGiaoHang)
+);
+
+CREATE TABLE CHITIETDATHANG(
+    MaSoDatHang INT,
+    MaSoHangHoa INT,
+	SoLuong INT,
+    GiaDatHang DOUBLE,
+	CONSTRAINT FK_MSDH_CTDT
+		FOREIGN KEY (MaSoDatHang) REFERENCES DATHANG(MaSoDatHang),
+	CONSTRAINT FK_MSHH_CTDT
+		FOREIGN KEY (MaSoHangHoa) REFERENCES HANGHOA(MaSoHangHoa),
+	CONSTRAINT PK_CTDH
+		PRIMARY KEY (MaSoDatHang,MaSoHangHoa)
+);
+
+
+DELIMITER $$
+CREATE TRIGGER TRG_SoLuongHangHoa
+BEFORE INSERT ON CHITIETDATHANG
+FOR EACH ROW
+BEGIN
+	DECLARE soLuongHangHoa INT;
+	SELECT HH.SoLuong INTO soLuongHangHoa FROM HANGHOA AS HH
+	WHERE NEW.MaSoHangHoa = HH.MaSoHangHoa;
+    
+	IF NEW.SoLuong <= soLuongHangHoa
+	THEN
+		UPDATE HANGHOA 
+        SET SoLuong = SoLuong - NEW.SoLuong
+    WHERE NEW.MaSoHangHoa = HANGHOA.MaSoHangHoa ;
+    ELSE
+		SIGNAL SQLSTATE '45000'
+   		SET MESSAGE_TEXT = 'So Luong Hang Hoa Trong Chi Tiet Dat Hang > So Luong Trong Bang Hang Hoa';
+	END IF;
+END $$
+ DELIMITER ;
+ 
+
+select MaSoHangHoa,sum(SoLuong) as sanphambanduoc  from chitietdathang
+group by MaSoHangHoa;
