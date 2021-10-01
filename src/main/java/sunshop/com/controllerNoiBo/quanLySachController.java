@@ -69,8 +69,6 @@ public class quanLySachController {
 		 if(file.isEmpty()) {
 			 n_sach.setHinh("444.png"); 
 		 }else {
-			 //Day Len Server Tomcat. Dùng servlet content
-			 /*D:\java\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\sunshop\resources\images\product*/
 			 //transferto se tu tim. neu co roi n se khong them anh
 			 String path = app.getRealPath("/resources/images/product"); 
 			 File f = new File(path,file.getOriginalFilename());
